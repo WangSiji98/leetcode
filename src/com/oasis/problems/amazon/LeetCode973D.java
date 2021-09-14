@@ -33,9 +33,6 @@ public class LeetCode973D {
     }
 
     private void quickSelect(int[] nums, int left, int right, int k) {
-//        if (left > right) {
-//            return;
-//        }
         int randK = partition(nums, left, right);
         if (randK == k - 1) {
             return;
@@ -45,7 +42,6 @@ public class LeetCode973D {
         } else {
             quickSelect(nums, randK + 1, right, k);
         }
-
     }
 
     private int randomPartion(int[] nums, int left, int right) {

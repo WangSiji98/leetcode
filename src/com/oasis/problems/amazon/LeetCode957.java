@@ -4,47 +4,41 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-// 超时 思路是对的
 public class LeetCode957 {
-    private Map<String, int[]> map;
+//    private Map<Byte, Integer> map = new HashMap<>();
 
     public int[] prisonAfterNDays(int[] cells, int n) {
-        map = new HashMap<>();
-        map.put(getState(cells), new int[]{0, -1});
         int i = 0;
+        int period = 0;
+        Byte startState = 0;
         while (i < n) {
             ++i;
-            int[] tmp = new int[8];
-            for (int j = 1; j < 7; ++j) {
-                if (cells[j - 1] == cells[j + 1]) {
-                    tmp[j] = 1;
-                } else {
-                    tmp[j] = 0;
-                }
-            }
-            cells = tmp;
-            String cur = getState(cells);
-            if (map.containsKey(cur)) {
-                if (map.get(cur)[1] != -1) {
-                    if (i + map.get(cur)[1] < n) {
-                        i += map.get(cur)[1];
-                    }
-                } else {
-                    map.put(cur, new int[]{map.get(cur)[0], i - map.get(cur)[0]});
-                }
-            } else {
-                map.put(cur, new int[]{i, -1});
+            cells = next(cells);
+            if (i == 1) {
+                startState = getState(cells);
+            } else if (getState(cells).equals(startState)) {
+                period = i - 1;
+                i = n - (n - i) % period;
             }
         }
         return cells;
     }
 
-    private String getState(int[] cells) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 8; ++i) {
-            stringBuilder.append(cells[i]);
+    private Byte getState(int[] cells) {
+        byte state = 0;
+        // only encode 6 bits in the middle
+        for (int i = 0; i < 6; ++i) {
+            state ^= ((cells[i + 1] & 1) << i);
         }
-        return stringBuilder.toString();
+        return state;
+    }
+
+    private int[] next(int[] cells) {
+        int[] next = new int[8];
+        for (int i = 1; i < 7; ++i) {
+            next[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+        }
+        return next;
     }
 
     public static void main(String[] args) {
@@ -53,5 +47,4 @@ public class LeetCode957 {
         int n = 1000000000;
         System.out.println(Arrays.toString(leetCode957.prisonAfterNDays(cells, n)));
     }
-
 }
