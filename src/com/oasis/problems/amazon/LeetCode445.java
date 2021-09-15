@@ -21,6 +21,7 @@ public class LeetCode445 {
         return prev;
     }
 
+    // 链表逐位置相加 需要考虑进位
     public static ListNode add(ListNode p1, ListNode p2) {
         ListNode dummy = new ListNode();
         ListNode p = dummy;
