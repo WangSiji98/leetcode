@@ -40,6 +40,7 @@ public class LinkedList {
         return prev;
     }
 
+    // 逐位相加 需要考虑进位
     public static ListNode add(ListNode p1, ListNode p2) {
         ListNode dummy = new ListNode();
         ListNode p = dummy;
