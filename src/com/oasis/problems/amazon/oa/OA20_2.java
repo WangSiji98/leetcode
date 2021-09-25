@@ -5,6 +5,6 @@ package com.oasis.problems.amazon.oa;
  * https://leetcode-cn.com/problems/redundant-connection/
  */
 
-public class LC20_1 {
+public class OA20_2 {
 
 }
