@@ -1,5 +1,11 @@
 package com.oasis.problems.amazon.oa;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
+
 /**
  * LC1492
  * Given two positive integers n and k.
@@ -39,5 +45,23 @@ package com.oasis.problems.amazon.oa;
  */
 
 public class OA3_2 {
-
+    public int kthFactor(int n, int k) {
+        Deque<Integer> factor1 = new ArrayDeque<>();
+        Deque<Integer> factor2 = new ArrayDeque<>();
+        int cur = 0;
+        for (int i = 1; i * i <= n; ++i) {
+            if (n % i == 0) {
+                factor1.addLast(i);
+                factor2.addFirst(n / i);
+                ++cur;
+                if (cur == k) {
+                    return i;
+                }
+            }
+        }
+        List<Integer> factor = new ArrayList<>();
+        factor.addAll(factor1);
+        factor.addAll(factor2);
+        return factor.size() >= k ? factor.get(k - 1) : -1;
+    }
 }

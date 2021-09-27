@@ -1,5 +1,8 @@
 package com.oasis.problems.amazon.oa;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Cutoff rank
  *
@@ -23,8 +26,37 @@ package com.oasis.problems.amazon.oa;
  * Score : 5 | Rank 4
  *
  * Finally, any player with a score of 0 is automatically ineligible for leveling-up, regardless of their rank.
+ * Return the number of players who are eligible for leveling-up
  */
 
-public class OA9_1 {
+class Solution9_1 {
+    public int cutOffRank(int[] socores, int cutOff, int num) {
+        int[] freq = new int[101];
+        for (int i: socores) {
+            ++freq[i];
+        }
+        int currRank = 1;
+        int index = 100;
+        int res = 0;
+        while (currRank <= cutOff && index >= 0) {
+            if (freq[index] == 0) {
+                --index;
+                continue;
+            }
+            currRank += freq[index];
+            res += freq[index];
+            --index;
+        }
+        return res;
+    }
+}
 
+public class OA9_1 {
+    public static void main(String[] args) {
+        Solution9_1 solution = new Solution9_1();
+        int[] scores = new int[]{10, 10, 10, 10, 5};
+        int cutOff = 5;
+        int num = 4;
+        System.out.println(solution.cutOffRank(scores, cutOff, num));
+    }
 }

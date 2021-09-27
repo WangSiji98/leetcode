@@ -1,5 +1,10 @@
 package com.oasis.problems.amazon.oa;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * https://leetcode.com/discuss/interview-question/1424367/Amazon-OA-or-Choose-a-flask
  * Choose a flask
@@ -52,5 +57,59 @@ package com.oasis.problems.amazon.oa;
  */
 
 public class OA14_2 {
+    private Map<Integer, List<Integer>> map = new HashMap<>();
+
+    public int flask(int numOrders, int[] requirements, int flaskType, int totalMarks, int[][] markings) {
+        for (int i = 0; i < totalMarks; ++i) {
+            if (!map.containsKey(markings[i][0])) {
+                map.put(markings[i][0], new ArrayList<>());
+            }
+            map.get(markings[i][0]).add(markings[i][1]);
+        }
+        int res = 0;
+        int minWaste = Integer.MAX_VALUE;
+        for (int i = 0; i < flaskType; ++i) {
+            int waste = 0;
+            boolean flag = true;
+            for (int j = 0; j < numOrders; ++j) {
+                int require = requirements[j];
+                for (Integer mark: map.get(i)) {
+                    if (mark > require) {
+                        waste += mark - require;
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    break;
+                }
+            }
+            if (waste < minWaste && flag) {
+                minWaste = waste;
+                res = i;
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        OA14_2 oa14_2 = new OA14_2();
+        int[] requirements = new int[]{4,6,6,7};
+        int numOrders = 4;
+        int flaskType = 3;
+        int totalMarks = 9;
+        int[][] markings = new int[][]{
+            {0, 3},
+            {0, 5},
+            {0, 7},
+            {1, 6},
+            {1, 8},
+            {1, 9},
+            {2, 3},
+            {2, 5},
+            {2, 6},
+        };
+        System.out.println(oa14_2.flask(numOrders, requirements, flaskType, totalMarks,markings));
+    }
 
 }

@@ -26,5 +26,31 @@ package com.oasis.problems.amazon.oa;
  */
 
 public class OA3_1 {
+    private int[] map;
+
+    public int firstUniqChar(String s) {
+        map = new int[26];
+        for (int i = 0; i < s.length(); ++i) {
+            int index = s.charAt(i) - 'a';
+            if (map[index] == 0) {
+                map[index] = i + 1;
+            } else if (map[index] != -1) {
+                map[index] = -1;
+            }
+        }
+        int min = 25;
+        for (int i: map) {
+            if (i != -1 && i != 0) {
+                min = Math.min(min, i - 1);
+            }
+        }
+        return min == 25 ? -1 : min;
+    }
+
+    public static void main(String[] args) {
+        OA3_1 oa3_1 = new OA3_1();
+        String s = "loveleetcode";
+        System.out.println(oa3_1.firstUniqChar(s));
+    }
 
 }

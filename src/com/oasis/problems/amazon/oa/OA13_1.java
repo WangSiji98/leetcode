@@ -1,5 +1,8 @@
 package com.oasis.problems.amazon.oa;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  *  missing lru
  *
@@ -56,6 +59,50 @@ package com.oasis.problems.amazon.oa;
  *   Asterisk (*) represents a cache miss. Hence, the total number of a cache miss is `4`.
  */
 
-public class OA13_1 {
+class LRUCache extends LinkedHashMap<Integer, Integer>{
+    private int capacity;
+    private int miss = 0;
 
+    public LRUCache(int capacity) {
+        super(capacity, 0.75F, true);
+        this.capacity = capacity;
+    }
+
+    public void get(int key) {
+        if (!super.containsKey(key)) {
+            super.put(key, 0);
+            ++miss;
+        } else {
+            super.get(key);
+        }
+    }
+
+    public int getMiss() {
+        return miss;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+        return size() > capacity;
+    }
+}
+
+// 如果是 OA 直接使用java的LinkedHashMap
+
+public class OA13_1 {
+    private LRUCache cache = null;
+
+    public int cacheMiss(int n, int[] pageRequests, int maxCacheSize) {
+        cache = new LRUCache(maxCacheSize);
+        for (int page: pageRequests) {
+            cache.get(page);
+        }
+        return cache.getMiss();
+    }
+
+    public static void main(String[] args) {
+        OA13_1 oa13_1 = new OA13_1();
+        int[] pages = new int[]{1,2,1,3,1,2};
+        System.out.println(oa13_1.cacheMiss(6, pages, 2));
+    }
 }

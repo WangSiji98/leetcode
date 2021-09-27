@@ -45,4 +45,5 @@ public class OA1_1 {
         int k = 3;
         System.out.println(oa1_1.minCover(pos, k));
     }
+
 }

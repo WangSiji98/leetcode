@@ -7,6 +7,8 @@ package com.oasis.problems.amazon.oa;
  * output: 2
  * explanation:
  * 你可以分成 [1, 4], [8, 7] 或者 [1], [4, 7], [8], 但前者分的组数更小。所以output = 2
+ *
+ * 与 OA 2-1 一样 不再重复做
  */
 
 public class OA5_2 {
