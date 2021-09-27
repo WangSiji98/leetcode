@@ -1,5 +1,10 @@
 package com.oasis.problems.amazon.oa;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * LC56
  *
@@ -27,5 +32,50 @@ package com.oasis.problems.amazon.oa;
  */
 
 public class OA4_1 {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(
+            intervals,
+            new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    return o1[0] - o2[0];
+                }
+            }
+        );
+        int n = intervals.length;
+        int left = intervals[0][0];
+        int right = intervals[0][1];
+        int i = 1;
+        List<int[]> list = new ArrayList<>();
+        while (i < n) {
+            int[] curr = intervals[i];
+            if (curr[0] > right) {
+                list.add(new int[]{left, right});
+                left = curr[0];
+                right = curr[1];
+            } else {
+                right = Math.max(right, curr[1]);
+            }
+            ++i;
+        }
+        list.add(new int[]{left, right});
+        return list.toArray(new int[list.size()][]);
+    }
+
+    public static void main(String[] args) {
+        OA4_1 oa4_1 = new OA4_1();
+        int[][] intervals = new int[][]{
+            {1, 3},
+            {2, 6},
+            {4, 5},
+            {8, 10},
+            {10, 13},
+            {11, 15}
+        };
+        int[][] res = oa4_1.merge(intervals);
+        for (int[] i: res) {
+            System.out.println(Arrays.toString(i));
+        }
+    }
 
 }

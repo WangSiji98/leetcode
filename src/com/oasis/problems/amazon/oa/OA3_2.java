@@ -52,7 +52,9 @@ public class OA3_2 {
         for (int i = 1; i * i <= n; ++i) {
             if (n % i == 0) {
                 factor1.addLast(i);
-                factor2.addFirst(n / i);
+                if (i * i != n) {
+                    factor2.addFirst(n / i);
+                }
                 ++cur;
                 if (cur == k) {
                     return i;
@@ -63,5 +65,10 @@ public class OA3_2 {
         factor.addAll(factor1);
         factor.addAll(factor2);
         return factor.size() >= k ? factor.get(k - 1) : -1;
+    }
+
+    public static void main(String[] args) {
+        OA3_2 oa3_2 = new OA3_2();
+        System.out.println(oa3_2.kthFactor(1000, 3));
     }
 }
