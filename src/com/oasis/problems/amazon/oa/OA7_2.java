@@ -10,7 +10,7 @@ import javax.jws.Oneway;
  * 给一个int[] 找出所有含不超过k个奇数的subarray的数目
  */
 
-// 这题直接数学方法就行，先找出总共有几个奇数，然后直接算就完了;
+// 利用重写hashcode去重 或者 转化为字符串去重，千万不可以 在set输入list
 class Solution7_2 {
 
     public int findSubarrau(int[] arr, int n, int k) {
