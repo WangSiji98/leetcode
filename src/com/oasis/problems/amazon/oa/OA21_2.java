@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Two sum unique pairs. 类似LC1，只不过让把一个给定的input数组nums里面全部的相加为target的unique pair都找出来。两对数互为unique pair指的是两组数中至少有1个数不一样，比如[5, 7]和[7, 5]不会被认定为两对unique pair。
+ * Two sum unique pairs. 类似LC1，只不过让把一个给定的input数组nums里面全部的相加为的unique pair都找出来。两对数互为unique pair指的是两组数中至少有1个数不一样，比如[5, 7]和[7, 5]不会被认定为两对unique pair。
  */
 
 public class OA21_2 {
