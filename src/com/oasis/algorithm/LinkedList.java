@@ -69,7 +69,7 @@ public class LinkedList {
         return dummy.next;
     }
 
-    private static void print(ListNode head) {
+    public static void print(ListNode head) {
         while (head != null) {
             System.out.println(head.val);
             head = head.next;

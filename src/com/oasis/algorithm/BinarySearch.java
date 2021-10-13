@@ -41,7 +41,6 @@ public class BinarySearch {
         return nums[r];
     }
 
-
     // 如果需要包含 target (target存在）
     // 第一个大于等于target的数字
     public static int binarySearch3(int nums[], int target) {
