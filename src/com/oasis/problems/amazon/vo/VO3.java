@@ -1,12 +1,14 @@
-package com.oasis.algorithm;
+package com.oasis.problems.amazon.vo;
 
 /**
  * 总结一下
  * 首先是区间，不加1的情况是 [l, mid] 和 [mid + 1, r]，一般用l来找比target大的，因为l = mid + 1；
  * +1则是 [l, mid - 1] 和 [mid, r]，一般用r来找比target小的，因为r = mid - 1；
  * 然后是小于还是小于等于，如果 不带等于会排除 target的可能性，反正则包含 target
+ *
+ * 本次加入负数的讨论
  */
-public class BinarySearch {
+public class VO3 {
     // mid不加1，此时区间划分为[l, mid] 和 [mid + 1, r]
     // 我们要找的是 比target大的第一个数 (即使target存在)
     public static int binarySearch1(int nums[], int target) {
@@ -74,9 +76,10 @@ public class BinarySearch {
         return nums[r];
     }
 
+    // 这套模板 对 负数也是有用的
     public static void main(String[] args) {
-        int[] nums = new int[]{5,6,7,8,10,11,11,12,13,14,15};
-        int target = 4;
+        int[] nums = new int[]{-10,-9,-8,-7,-6,-5,-4,-3,-2,-1};
+        int target = -6;
         // 找到第一个比11大的数
         System.out.println(binarySearch1(nums, target));
         // 找到第一个比11小的数
